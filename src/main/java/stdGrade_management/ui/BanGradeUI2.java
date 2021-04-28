@@ -1,6 +1,7 @@
 package stdGrade_management.ui;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,29 +9,30 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import stdGrade_management.dto.Ban;
 import stdGrade_management.dto.StudentScoreView;
 import stdGrade_management.service.StudentScoreViewService;
+import stdGrade_management.service.StudentService;
 import stdGrade_management.ui.content.StdScoreByBanPanel;
 import stdGrade_management.ui.list.StudentScoreViewTablePanel;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
-public class BanGradeUI extends JFrame implements ActionListener {
+public class BanGradeUI2 extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JButton btnSort;
 	private JButton btnClear;
 	private StudentScoreViewService service;
+	private StudentService StdService;
 	private StudentScoreViewTablePanel pList;
 	private StdScoreByBanPanel pContent;
 	private JLabel lblBanByScore;
 
-	public BanGradeUI() {
+	public BanGradeUI2() {
 		service = new StudentScoreViewService();
 		initialize();
 	}

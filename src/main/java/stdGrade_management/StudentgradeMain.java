@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import stdGrade_management.service.StudentScoreViewService;
 import stdGrade_management.ui.BanGradeUI;
+import stdGrade_management.ui.BanGradeUI2;
 import stdGrade_management.ui.StdScoreInsertUI;
 import stdGrade_management.ui.TotalGradeUI;
 import stdGrade_management.ui.list.StdScoreTablePanel;
@@ -27,6 +28,7 @@ public class StudentgradeMain extends JFrame implements ActionListener {
 	private JButton btnGradeTotal;
 	private StudentScoreViewService service;
 	private StdScoreTablePanel pStdScoreList;
+	private JButton btnNewButton;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -48,7 +50,7 @@ public class StudentgradeMain extends JFrame implements ActionListener {
 	private void initialize() {
 		setTitle("성적관리 프로그램");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 547, 299);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -72,6 +74,10 @@ public class StudentgradeMain extends JFrame implements ActionListener {
 		btnGradeTotal.addActionListener(this);
 		pBtn.add(btnGradeTotal);
 		
+		btnNewButton = new JButton("임시버튼");
+		btnNewButton.addActionListener(this);
+		pBtn.add(btnNewButton);
+		
 		pStdScoreList = new StdScoreTablePanel();
 		pStdScoreList.setService(service);
 		pStdScoreList.loadData();
@@ -79,6 +85,9 @@ public class StudentgradeMain extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNewButton) {
+			actionPerformedBtnNewButton(e);
+		}
 		if (e.getSource() == btnGradeTotal) {
 			actionPerformedBtnGradeTotal(e);
 		}
@@ -99,6 +108,10 @@ public class StudentgradeMain extends JFrame implements ActionListener {
 	}
 	protected void actionPerformedBtnGradeTotal(ActionEvent e) {
 		TotalGradeUI frame = new TotalGradeUI();
+		frame.setVisible(true);
+	}
+	protected void actionPerformedBtnNewButton(ActionEvent e) {
+		BanGradeUI2 frame = new BanGradeUI2();
 		frame.setVisible(true);
 	}
 }

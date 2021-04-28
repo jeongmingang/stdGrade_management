@@ -7,7 +7,7 @@ import stdGrade_management.dao.impl.BanDaoImpl;
 import stdGrade_management.dto.Ban;
 
 public class BanService {
-	private BanDao dao = BanDaoImpl.getInstance();
+	private BanDaoImpl dao = BanDaoImpl.getInstance();
 	
 	public List<Ban> showBans(){
 		return dao.selectBanByAll();

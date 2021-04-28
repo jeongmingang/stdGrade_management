@@ -2,12 +2,11 @@ package stdGrade_management.service;
 
 import java.util.List;
 
-import stdGrade_management.dao.StudentDao;
 import stdGrade_management.dao.impl.StudentDaoImpl;
 import stdGrade_management.dto.Student;
 
 public class StudentService {
-	private StudentDao dao = StudentDaoImpl.getInstance();
+	private StudentDaoImpl dao = StudentDaoImpl.getInstance();
 	
 	public List<Student> showStudents() {
 		return dao.selectStudentByAll();

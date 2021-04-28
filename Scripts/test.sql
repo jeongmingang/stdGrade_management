@@ -51,7 +51,7 @@ update student
  where stdNo = 20031;
 
 -- 학생 삭제
-delete from student where stdNo = 20031;
+delete from student where stdNo = 20034;
 
 -- 점수 테이블 ---------------------------------------------------------
 select stdNo, subjNo, stdScore from score;
@@ -168,8 +168,6 @@ select round(sum(국어)/count(stdNo),1) 국어평균점수,
 	   round(sum(국어+영어+수학+사회+과학)/5/count(stdNo),2) 전체평균점수
 	from vw_student_score;
 
-
-//2646
 
 
 

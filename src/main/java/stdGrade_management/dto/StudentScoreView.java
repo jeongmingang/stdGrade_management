@@ -174,6 +174,4 @@ public class StudentScoreView {
 				"stdNo=%s, stdName=%s, ban=%s, kor=%s, eng=%s, math=%s, soc=%s, sci=%s, sumScore=%s, avgScore=%s",
 				stdNo, stdName, ban, kor, eng, math, soc, sci, sumScore, avgScore);
 	}
-	
-	
 }

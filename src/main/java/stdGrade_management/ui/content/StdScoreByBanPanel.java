@@ -7,15 +7,16 @@ import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import stdGrade_management.dto.Ban;
+import stdGrade_management.dto.StudentScoreView;
 import stdGrade_management.dto.Subject;
 import stdGrade_management.service.StudentScoreViewService;
+import stdGrade_management.ui.exception.InvalidCheckException;
 
 @SuppressWarnings("serial")
-public class StdScoreByBanPanel extends JPanel {
+public class StdScoreByBanPanel extends AbstractContentPanel<StudentScoreView>{
 	private JComboBox<Ban> cmbBan;
 	private JComboBox<Subject> cmbSubject;
 	private StudentScoreViewService service;
@@ -57,6 +58,15 @@ public class StdScoreByBanPanel extends JPanel {
 		cmbSubject = new JComboBox<>();
 		add(cmbSubject);
 	}
+	
+	@Override
+	public void setItem(StudentScoreView item) {
+	}
+
+	@Override
+	public StudentScoreView getItem() {
+		return null;
+	}
 
 	public Ban getBan() {
 		Ban ban = null;
@@ -84,5 +94,12 @@ public class StdScoreByBanPanel extends JPanel {
 	public void clearTf() {
 		cmbBan.setSelectedIndex(-1);
 		cmbSubject.setSelectedIndex(-1);
+	}
+
+	@Override
+	public void validCheck() {
+		if (cmbBan.getSelectedIndex() == -1 || cmbSubject.getSelectedIndex() == -1) {
+			throw new InvalidCheckException();
+		}
 	}
 }

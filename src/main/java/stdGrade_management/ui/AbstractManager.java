@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -17,9 +18,11 @@ import stdGrade_management.ui.exception.SqlConstraintException;
 import stdGrade_management.ui.list.AbstractCustomTablePanel;
 
 @SuppressWarnings("serial")
-public abstract class AbstractManagerUI<T> extends JFrame implements ActionListener {
+public abstract class AbstractManager<T> extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
+	protected JButton btnAdd;
+	private JButton btnClear;
 	
 	protected AbstractContentPanel<T> pContent;
 	protected AbstractCustomTablePanel<T> pList;
@@ -28,7 +31,7 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 	protected static final String DETAIL_MENU = "학생상세정보 보기";
 	
 	
-	public AbstractManagerUI() {
+	public AbstractManager() {
 		setService();	//service 연결
 		initialize();
 		tableLoadData(); //component load data
@@ -44,6 +47,17 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 		
 		pContent = createContentPanel();
 		contentPane.add(pContent);
+		
+		JPanel pBtns = new JPanel();
+		contentPane.add(pBtns);
+		
+		btnAdd = new JButton("추가");
+		btnAdd.addActionListener(this);
+		pBtns.add(btnAdd);
+		
+		btnClear = new JButton("취소");
+		btnClear.addActionListener(this);
+		pBtns.add(btnClear);
 		
 		pList = createTablePanel();
 		contentPane.add(pList);
@@ -83,10 +97,22 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 				actionPerformedMenuUpdate();
 			}
 			
-			if (e.getActionCommand().contentEquals(AbstractManagerUI.DETAIL_MENU)){
+			if (e.getActionCommand().contentEquals(AbstractManager.DETAIL_MENU)){
 				actionPerformedMenuGubun();
 			}
 	
+		}else {
+			if (e.getSource() == btnClear) {
+			actionPerformedBtnClear(e);
+			}
+			
+			if (e.getSource() == btnAdd) {
+				if (e.getActionCommand().contentEquals("추가")) {
+					actionPerformedBtnAdd(e);
+				}else {
+					actionPerformedBtnUpdate(e);
+				}
+			}
 		}
 		}catch (InvalidCheckException | SqlConstraintException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -104,4 +130,14 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 	protected abstract void actionPerformedMenuGubun();
 	protected abstract void actionPerformedMenuUpdate();
 	protected abstract void actionPerformedMenuDelete();	
+	protected abstract void actionPerformedBtnUpdate(ActionEvent e);
+	protected abstract void actionPerformedBtnAdd(ActionEvent e);
+	
+	protected void actionPerformedBtnClear(ActionEvent e) {
+		pContent.clearTf();
+		
+		if (btnAdd.getText().contentEquals("수정")) {
+			btnAdd.setText("추가");
+		}
+	}
 }

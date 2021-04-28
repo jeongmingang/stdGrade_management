@@ -2,12 +2,11 @@ package stdGrade_management.service;
 
 import java.util.List;
 
-import stdGrade_management.dao.ScoreDao;
 import stdGrade_management.dao.impl.ScoreDaoImpl;
 import stdGrade_management.dto.Score;
 
 public class ScoreService {
-	private ScoreDao dao = ScoreDaoImpl.getInstance();
+	private ScoreDaoImpl dao = ScoreDaoImpl.getInstance();
 	
 	public List<Score> showScores(){
 		return dao.selectScoreByAll();

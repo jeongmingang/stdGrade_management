@@ -3,18 +3,17 @@ package stdGrade_management.ui.content;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import stdGrade_management.dto.StudentScoreView;
 import stdGrade_management.service.ScoreService;
 import stdGrade_management.service.StudentScoreViewService;
 import stdGrade_management.ui.exception.InvalidCheckException;
-import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class StdScoreInsertPanel extends JPanel {
+public class StdScoreInsertPanel extends AbstractContentPanel<StudentScoreView> {
 	private JTextField tfKor;
 	private JTextField tfEng;
 	private JTextField tfMath;
@@ -76,6 +75,7 @@ public class StdScoreInsertPanel extends JPanel {
 		add(tfSci);
 	}
 	
+	@Override
 	public void setItem(StudentScoreView item) {
 		tfKor.setText(item.getKor() + "");
 		tfEng.setText(item.getEng() + "");
@@ -84,6 +84,7 @@ public class StdScoreInsertPanel extends JPanel {
 		tfSci.setText(item.getSci() + "");
 	}
 	
+	@Override
 	public StudentScoreView getItem() {
 		validCheck();
 		int kor = Integer.parseInt(tfKor.getText().trim());
@@ -94,7 +95,8 @@ public class StdScoreInsertPanel extends JPanel {
 		
 		return new StudentScoreView(kor, eng, math, soc, sci);
 	}
-
+	
+	@Override
 	public void validCheck() {
 		if (tfKor.getText().equals("") || tfEng.getText().equals("")
 				|| tfMath.getText().equals("")
@@ -104,6 +106,7 @@ public class StdScoreInsertPanel extends JPanel {
 		}
 	}
 	
+	@Override
 	public void clearTf() {
 		tfKor.setText("");
 		tfEng.setText("");
@@ -111,46 +114,4 @@ public class StdScoreInsertPanel extends JPanel {
 		tfSoc.setText("");
 		tfSci.setText("");
 	}
-
-	public JTextField getTfKor() {
-		return tfKor;
-	}
-
-	public void setTfKor(JTextField tfKor) {
-		this.tfKor = tfKor;
-	}
-
-	public JTextField getTfEng() {
-		return tfEng;
-	}
-
-	public void setTfEng(JTextField tfEng) {
-		this.tfEng = tfEng;
-	}
-
-	public JTextField getTfMath() {
-		return tfMath;
-	}
-
-	public void setTfMath(JTextField tfMath) {
-		this.tfMath = tfMath;
-	}
-
-	public JTextField getTfSoc() {
-		return tfSoc;
-	}
-
-	public void setTfSoc(JTextField tfSoc) {
-		this.tfSoc = tfSoc;
-	}
-
-	public JTextField getTfSci() {
-		return tfSci;
-	}
-
-	public void setTfSci(JTextField tfSci) {
-		this.tfSci = tfSci;
-	}
-	
-	
 }

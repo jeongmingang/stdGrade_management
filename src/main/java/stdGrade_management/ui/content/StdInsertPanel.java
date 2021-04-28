@@ -79,15 +79,17 @@ public class StdInsertPanel extends AbstractContentPanel<Student> {
 		add(panel_2);
 	}
 	
-	public Ban getBan() {
-		Ban ban = null;
-		if(cmbBan.getSelectedIndex() == -1) {
-			return ban;
+	public Student getStudent() {
+		if (tfStdNo.getText().equals("") || tfStdName.getText().equals("") 
+				|| cmbBan.getSelectedIndex() == -1) {
+			throw new InvalidCheckException();
 		}
-		if(cmbBan.getSelectedIndex() != -1) {
-			ban = (Ban) cmbBan.getSelectedItem();
-		}
-		return ban;
+		
+		int stdNo = Integer.parseInt(tfStdNo.getText().trim());
+		String stdName = tfStdName.getText().trim();
+		Ban banCode = (Ban) cmbBan.getSelectedItem();
+		
+		return new Student(stdNo, stdName, banCode);
 	}
 	
 	@Override

@@ -2,12 +2,11 @@ package stdGrade_management.service;
 
 import java.util.List;
 
-import stdGrade_management.dao.SubjectDao;
 import stdGrade_management.dao.impl.SubjectDaoImpl;
 import stdGrade_management.dto.Subject;
 
 public class SubjectService {
-	private SubjectDao dao = SubjectDaoImpl.getInstance();
+	private SubjectDaoImpl dao = SubjectDaoImpl.getInstance();
 	
 	public List<Subject> showSubjects(){
 		return dao.selectSubjectByAll();

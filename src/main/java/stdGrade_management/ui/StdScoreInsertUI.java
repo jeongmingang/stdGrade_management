@@ -19,6 +19,8 @@ import stdGrade_management.service.StudentScoreViewService;
 import stdGrade_management.service.StudentService;
 import stdGrade_management.ui.content.StdInsertPanel;
 import stdGrade_management.ui.content.StdScoreInsertPanel;
+import stdGrade_management.ui.exception.InvalidCheckException;
+import stdGrade_management.ui.list.StudentScoreViewTablePanel;
 
 @SuppressWarnings("serial")
 public class StdScoreInsertUI extends JFrame implements ActionListener {
@@ -26,22 +28,23 @@ public class StdScoreInsertUI extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private ScoreService scoreService;
 	private StudentService stdService;
-	private StudentScoreViewService Viewservice;	
+	private StudentScoreViewService viewService;	
 	private JButton btnInput;
 	private JButton btnClear;
+	private StudentScoreViewTablePanel pList;
 	private StdInsertPanel pWest;
 	private StdScoreInsertPanel pCenter;
 
 	public StdScoreInsertUI() {
 		scoreService = new ScoreService();
 		stdService = new StudentService();
-		Viewservice = new StudentScoreViewService();
+		viewService = new StudentScoreViewService();
 		initialize();
 	}
 	private void initialize() {
 		setTitle("학생성적입력");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 400, 493, 364);
+		setBounds(100, 400, 1022, 364);
 		contentPane = new JPanel();
 		contentPane.setBorder(new TitledBorder(null, "학생성적입력", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setContentPane(contentPane);
@@ -59,20 +62,48 @@ public class StdScoreInsertUI extends JFrame implements ActionListener {
 		pSouth.add(btnClear);
 		
 		pWest = new StdInsertPanel();
-		pWest.setService(Viewservice);
+		pWest.setService(viewService);
 		
 		contentPane.add(pWest, BorderLayout.WEST);
 		
 		pCenter = new StdScoreInsertPanel();
 		contentPane.add(pCenter, BorderLayout.CENTER);
+		
+		pList = new StudentScoreViewTablePanel();
+		pList.setService(viewService);
+		pList.loadData();
+		contentPane.add(pList, BorderLayout.EAST);
 	}
+	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnClear) {
-			actionPerformedBtnClear(e);
+		try {
+			if (e.getSource() == btnClear) {
+				actionPerformedBtnClear(e);
+			}
+			if (e.getSource() == btnInput) {
+				actionPerformedBtnInput(e);
+			}
+			if (e.getSource() == btnInput) {
+				if (btnInput.getText().equals("추가")) {
+					actionPerformedBtnInput(e);
+				}
+				if (btnInput.getText().equals("수정")) {
+					actionPerformedBtnUpdate(e);
+				}
+			}
+			} catch (InvalidCheckException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+				pWest.clearTf();
 		}
-		if (e.getSource() == btnInput) {
-			actionPerformedBtnInput(e);
-		}
+	}
+	
+	protected void actionPerformedBtnUpdate(ActionEvent e) {
+		Student updateStd = pWest.getStudent();
+		stdService.modifyStudent(updateStd);
+		pList.loadData();
+		btnInput.setText("추가");
+		JOptionPane.showMessageDialog(null, updateStd.getStdNo() + " 정보 수정 완료");
+		pWest.clearTf();
 	}
 	
 	protected void actionPerformedBtnInput(ActionEvent e) {
@@ -101,6 +132,7 @@ public class StdScoreInsertUI extends JFrame implements ActionListener {
 		
 		pWest.clearTf();
 		pCenter.clearTf();
+		pList.loadData();
 	}
 	
 	protected void actionPerformedBtnClear(ActionEvent e) {
