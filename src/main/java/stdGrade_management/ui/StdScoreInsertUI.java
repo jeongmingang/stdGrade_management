@@ -143,15 +143,15 @@ public class StdScoreInsertUI extends JFrame implements ActionListener {
 			int sci = newScore.getSci();
 			
 			Score korScore = new Score(newStd, new Subject(1), kor);
-			scoreService.modifyScore(korScore);
+			scoreService.addScore(korScore);
 			Score engScore = new Score(newStd, new Subject(2), eng);
-			scoreService.modifyScore(engScore);
+			scoreService.addScore(engScore);
 			Score mathScore = new Score(newStd, new Subject(3), math);
-			scoreService.modifyScore(mathScore);
+			scoreService.addScore(mathScore);
 			Score socScore = new Score(newStd, new Subject(4), soc);
-			scoreService.modifyScore(socScore);
+			scoreService.addScore(socScore);
 			Score sciScore = new Score(newStd, new Subject(5), sci);
-			scoreService.modifyScore(sciScore);
+			scoreService.addScore(sciScore);
 		}else {
 			throw new SqlConstraintException();
 		}

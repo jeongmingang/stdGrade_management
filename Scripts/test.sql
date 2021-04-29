@@ -37,7 +37,7 @@ select stdNo, stdName, ban, 국어, 영어, 수학, 사회, 과학, sumScore, av
 	from vw_student_score;
 
 -- 학번으로 학생정보 검색
-select stdNo, stdName, ban from student where stdNo = 20002;
+select stdNo, stdName, ban from student where stdNo = 20032;
 
 -- 성명으로 학생정보 검색
 select stdNo, stdName, ban from student where stdName = '황보동명';
@@ -48,7 +48,7 @@ insert into student values (20001, '임성준', 'A02');
 -- 학생 수정
 update student 
 	set stdName = '신재석' , ban = 'A01' 
- where stdNo = 20031;
+ where stdNo = 20032;
 
 -- 학생 삭제
 delete from student where stdNo = 20033;
