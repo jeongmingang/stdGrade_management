@@ -8,9 +8,11 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
+import stdGrade_management.dto.StudentScoreView;
 import stdGrade_management.dto.Subject;
 import stdGrade_management.service.StudentScoreViewService;
 
@@ -18,7 +20,7 @@ import stdGrade_management.service.StudentScoreViewService;
 public class StdScoreTotalPanel extends JPanel {
 	private JComboBox<Subject> cmbSubject;
 	private StudentScoreViewService service;
-	private JTextField tfLimit;
+	private JSpinner jsLimit;
 	
 	public StdScoreTotalPanel() {
 		initialize();
@@ -29,6 +31,9 @@ public class StdScoreTotalPanel extends JPanel {
 		
 		List<Subject> subjectList = service.showSubjectList();
 		DefaultComboBoxModel<Subject> subjectModel = new DefaultComboBoxModel<>(new Vector<>(subjectList));
+		
+		List<StudentScoreView> stdViewList = service.showStdScores();
+		jsLimit.setModel(new SpinnerNumberModel(0, 0, stdViewList.size(), 1));
 		
 		cmbSubject.setModel(subjectModel);
 		cmbSubject.setSelectedIndex(-1);
@@ -41,9 +46,8 @@ public class StdScoreTotalPanel extends JPanel {
 		lblLimit.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(lblLimit);
 		
-		tfLimit = new JTextField();
-		add(tfLimit);
-		tfLimit.setColumns(10);
+		jsLimit = new JSpinner();
+		add(jsLimit);
 		
 		JLabel lblSubject = new JLabel("과목명");
 		lblSubject.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -52,6 +56,7 @@ public class StdScoreTotalPanel extends JPanel {
 		cmbSubject = new JComboBox<>();
 		add(cmbSubject);
 	}
+
 
 	public Subject getSubject() {
 		Subject subject = null;
@@ -66,15 +71,13 @@ public class StdScoreTotalPanel extends JPanel {
 	}
 	
 	public int getLimit() {
-		int limit = 0;
-		if (!tfLimit.getText().equals("")) {
-			limit = Integer.parseInt(tfLimit.getText().trim());
-		} 
+		int limit = (int) jsLimit.getValue();
 		return limit;
 	}
 
 	public void clearTf() {
-		tfLimit.setText("");
+		List<StudentScoreView> stdViewList = service.showStdScores();
+		jsLimit.setModel(new SpinnerNumberModel(0, 0, stdViewList.size(), 1));
 		cmbSubject.setSelectedIndex(-1);
 	}
 }

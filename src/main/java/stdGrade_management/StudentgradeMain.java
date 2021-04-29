@@ -12,10 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import stdGrade_management.service.StudentScoreViewService;
-import stdGrade_management.ui.BanGradeUI;
-import stdGrade_management.ui.BanGradeUI2;
+import stdGrade_management.ui.BanStdScoreUI;
+import stdGrade_management.ui.StdManagerUI;
 import stdGrade_management.ui.StdScoreInsertUI;
-import stdGrade_management.ui.TotalGradeUI;
+import stdGrade_management.ui.StdScoreManagerUI;
+import stdGrade_management.ui.TotalStdScoreUI;
 import stdGrade_management.ui.list.StdScoreTablePanel;
 
 @SuppressWarnings("serial")
@@ -23,12 +24,13 @@ public class StudentgradeMain extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JPanel pBtn;
-	private JButton btnGradeInsert;
-	private JButton btnGradeBan;
-	private JButton btnGradeTotal;
+	private JButton btnStdScoreInsert;
+	private JButton btnBanStdScore;
+	private JButton btnTotalStdScore;
 	private StudentScoreViewService service;
 	private StdScoreTablePanel pStdScoreList;
-	private JButton btnNewButton;
+	private JButton btnStdManager;
+	private JButton btnStdScoreManager;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -47,36 +49,42 @@ public class StudentgradeMain extends JFrame implements ActionListener {
 		service = new StudentScoreViewService();
 		initialize();
 	}
+	
 	private void initialize() {
 		setTitle("성적관리 프로그램");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 547, 299);
+		setBounds(100, 100, 656, 407);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		pBtn = new JPanel();
+		pBtn.setBorder(new EmptyBorder(5, 0, 5, 0));
 		FlowLayout flowLayout = (FlowLayout) pBtn.getLayout();
 		flowLayout.setVgap(10);
 		flowLayout.setHgap(10);
 		contentPane.add(pBtn, BorderLayout.NORTH);
 		
-		btnGradeInsert = new JButton("학생성적입력");
-		btnGradeInsert.addActionListener(this);
-		pBtn.add(btnGradeInsert);
+		btnStdScoreInsert = new JButton("학생성적입력");
+		btnStdScoreInsert.addActionListener(this);
+		pBtn.add(btnStdScoreInsert);
 		
-		btnGradeBan = new JButton("분반별성적확인");
-		btnGradeBan.addActionListener(this);
-		pBtn.add(btnGradeBan);
+		btnStdManager = new JButton("학생정보관리");
+		btnStdManager.addActionListener(this);
+		pBtn.add(btnStdManager);
 		
-		btnGradeTotal = new JButton("전체성적확인");
-		btnGradeTotal.addActionListener(this);
-		pBtn.add(btnGradeTotal);
+		btnStdScoreManager = new JButton("성적정보관리");
+		btnStdScoreManager.addActionListener(this);
+		pBtn.add(btnStdScoreManager);
 		
-		btnNewButton = new JButton("임시버튼");
-		btnNewButton.addActionListener(this);
-		pBtn.add(btnNewButton);
+		btnBanStdScore = new JButton("분반별성적확인");
+		btnBanStdScore.addActionListener(this);
+		pBtn.add(btnBanStdScore);
+		
+		btnTotalStdScore = new JButton("전체성적확인");
+		btnTotalStdScore.addActionListener(this);
+		pBtn.add(btnTotalStdScore);
 		
 		pStdScoreList = new StdScoreTablePanel();
 		pStdScoreList.setService(service);
@@ -85,33 +93,40 @@ public class StudentgradeMain extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnNewButton) {
-			actionPerformedBtnNewButton(e);
+		if (e.getSource() == btnStdScoreManager) {
+			actionPerformedBtnStdScoreManager(e);
 		}
-		if (e.getSource() == btnGradeTotal) {
-			actionPerformedBtnGradeTotal(e);
+		if (e.getSource() == btnStdManager) {
+			actionPerformedBtnStdManager(e);
 		}
-		if (e.getSource() == btnGradeBan) {
-			actionPerformedBtnGradeBan(e);
+		if (e.getSource() == btnTotalStdScore) {
+			actionPerformedBtnTotalStdScore(e);
 		}
-		if (e.getSource() == btnGradeInsert) {
-			actionPerformedBtnGradeInsert(e);
+		if (e.getSource() == btnBanStdScore) {
+			actionPerformedBtnBanStdScore(e);
+		}
+		if (e.getSource() == btnStdScoreInsert) {
+			actionPerformedBtnStdScoreInsert(e);
 		}
 	}
-	protected void actionPerformedBtnGradeInsert(ActionEvent e) {
+	protected void actionPerformedBtnStdScoreInsert(ActionEvent e) {
 		StdScoreInsertUI frame = new StdScoreInsertUI();
 		frame.setVisible(true);
 	}
-	protected void actionPerformedBtnGradeBan(ActionEvent e) {
-		BanGradeUI frame = new BanGradeUI();
+	protected void actionPerformedBtnStdManager(ActionEvent e) {
+		StdManagerUI frame = new StdManagerUI();
 		frame.setVisible(true);
 	}
-	protected void actionPerformedBtnGradeTotal(ActionEvent e) {
-		TotalGradeUI frame = new TotalGradeUI();
+	protected void actionPerformedBtnStdScoreManager(ActionEvent e) {
+		StdScoreManagerUI frame = new StdScoreManagerUI();
 		frame.setVisible(true);
 	}
-	protected void actionPerformedBtnNewButton(ActionEvent e) {
-		BanGradeUI2 frame = new BanGradeUI2();
+	protected void actionPerformedBtnBanStdScore(ActionEvent e) {
+		BanStdScoreUI frame = new BanStdScoreUI();
+		frame.setVisible(true);
+	}
+	protected void actionPerformedBtnTotalStdScore(ActionEvent e) {
+		TotalStdScoreUI frame = new TotalStdScoreUI();
 		frame.setVisible(true);
 	}
 }

@@ -19,11 +19,11 @@ public class StudentTablePanel extends AbstractCustomTablePanel<Student> {
 	@Override
 	public Student getItem() {
 		int row = table.getSelectedRow();
-		int stdNo = (int) table.getValueAt(row, 0);
-
 		if (row == -1) {
 			throw new NotSelectedException();
 		}
+		int stdNo = (int) table.getValueAt(row, 0);
+
 		return list.get(list.indexOf(new Student(stdNo)));
 	}
 

@@ -56,7 +56,7 @@ public class StudentDaoTest {
 	@Test
 	public void test01InsertStudent() {
 		System.out.printf("%s()%n", "test01InsertStudent");
-		Student newStd = new Student(20031, "임성준", new Ban("A02"));
+		Student newStd = new Student(30000, "임성준", new Ban("A02"));
 		int res = dao.insertStudent(newStd);
 		Assert.assertEquals(1, res);
 		System.out.println(dao.selectStudentByNo(newStd));
@@ -65,7 +65,7 @@ public class StudentDaoTest {
 	@Test
 	public void test02UpdateStudent() {
 		System.out.printf("%s()%n", "test02UpdateStudent");
-		Student updateStd = new Student(20031, "신재석", new Ban("A01"));
+		Student updateStd = new Student(30000, "신재석", new Ban("A01"));
 		int res = dao.updateStudent(updateStd);
 		Assert.assertEquals(1, res);
 		System.out.println(dao.selectStudentByNo(updateStd));
@@ -74,7 +74,7 @@ public class StudentDaoTest {
 	@Test
 	public void test03DeleteStudent() {
 		System.out.printf("%s()%n", "test03DeleteStudent");
-		Student deleteStd = new Student(20031);
+		Student deleteStd = new Student(30000);
 		int res = dao.deleteStudent(deleteStd);
 		Assert.assertEquals(1, res);
 		dao.selectStudentByAll().stream().forEach(System.out::println);

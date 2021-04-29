@@ -12,8 +12,8 @@ public class ScoreService {
 		return dao.selectScoreByAll();
 	}
 	
-	public void showScoreByNo(Score score){
-		dao.selectScoreByNo(score);
+	public List<Score> showScoreByNo(Score score){
+		return dao.selectScoreByNo(score);
 	}
 	
 	public void addScore(Score score){

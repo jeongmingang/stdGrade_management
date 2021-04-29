@@ -51,7 +51,7 @@ update student
  where stdNo = 20031;
 
 -- 학생 삭제
-delete from student where stdNo = 20034;
+delete from student where stdNo = 20033;
 
 -- 점수 테이블 ---------------------------------------------------------
 select stdNo, subjNo, stdScore from score;
@@ -64,11 +64,11 @@ insert into score values (30001, 2, 73);
 
 -- 점수 수정
 update score 
-	set stdScore = 85 
- where stdNo = 30001 and subjNo = 2;
+	set stdScore = 100 
+ where stdNo = 20032 and subjNo = 2;
 
 -- 점수 삭제
-delete from score where stdNo = 30001; 
+delete from score where stdNo = 10022; 
 
 -- 학생 상세 정보 테이블 -------------------------------------------------------
 select stdno, pic, gender, birthday from std_detail;
@@ -85,7 +85,7 @@ update std_detail
  where stdNo = 20001;
 
 -- 학생 상세 정보 삭제
-delete from std_detail where stdno = 20001;
+delete from std_detail where stdno = 20031;
 
 -- 전체 학생 정보 ----------------------------------------
 select s.stdNo, stdName, ban,  
@@ -151,14 +151,25 @@ select stdNo, subjNo, stdScore from score where stdNo = "30001";
 
 select stdNo, subjNo, stdScore from score where subjNo = 1;
 
+select stdScore from score where subjNo = 1;
+
 -- 과목별 평균점수 구하기 ----------------------------------------------------------
 select round(sum(국어)/count(stdNo),1) 국어평균점수 from vw_student_score;
 select round(sum(영어)/count(stdNo),1) 영어평균점수 from vw_student_score;
 select round(sum(수학)/count(stdNo),1) 수학평균점수 from vw_student_score;
 select round(sum(사회)/count(stdNo),1) 사회평균점수 from vw_student_score;
 select round(sum(과학)/count(stdNo),1) 과학평균점수 from vw_student_score;
-
 select round(sum(국어+영어+수학+사회+과학)/5/count(stdNo),2) 전체평균점수 from vw_student_score;
+
+select round(sum(stdScore)/count(stdNo),1) 국어평균점수 from score where subjNo = 1;
+select round(sum(stdScore)/count(stdNo),1) 영어평균점수 from score where subjNo = 2;
+select round(sum(stdScore)/count(stdNo),1) 수학평균점수 from score where subjNo = 3;
+select round(sum(stdScore)/count(stdNo),1) 사회평균점수 from score where subjNo = 4;
+select round(sum(stdScore)/count(stdNo),1) 과학평균점수 from score where subjNo = 5;
+
+select round(sum(stdScore)/count(stdNo),2) 전체평균점수 from score;
+
+
 
 select round(sum(국어)/count(stdNo),1) 국어평균점수,
 	   round(sum(영어)/count(stdNo),1) 영어평균점수,

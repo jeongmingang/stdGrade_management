@@ -13,6 +13,10 @@ public class Score {
 		this.stdNo = stdNo;
 	}
 
+	public Score(int stdScore) {
+		this.stdScore = stdScore;
+	}
+
 	public Score(Student stdNo, Subject subjNo, int stdScore) {
 		this.stdNo = stdNo;
 		this.subjNo = subjNo;

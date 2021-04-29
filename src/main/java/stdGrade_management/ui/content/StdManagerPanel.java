@@ -7,7 +7,6 @@ import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -19,19 +18,14 @@ import stdGrade_management.service.StudentService;
 import stdGrade_management.ui.exception.InvalidCheckException;
 
 @SuppressWarnings("serial")
-public class StdInsertPanel extends AbstractContentPanel<Student> {
+public class StdManagerPanel extends AbstractContentPanel<Student> {
 	private JTextField tfStdNo;
 	private JTextField tfStdName;
 	private JComboBox<Ban> cmbBan;
 	private StudentService StdService;
 	private StudentScoreViewService service;
-	private JPanel panel;
-	private JPanel panel_1;
-	private JLabel lblLeftTitle;
-	private JPanel panel_5;
-	private JPanel panel_2;
 
-	public StdInsertPanel() {
+	public StdManagerPanel() {
 		initialize();
 	}
 	
@@ -45,19 +39,8 @@ public class StdInsertPanel extends AbstractContentPanel<Student> {
 	}
 
 	private void initialize() {
-		setBorder(new EmptyBorder(0, 0, 0, 30));
+		setBorder(new EmptyBorder(20, 20, 20, 50));
 		setLayout(new GridLayout(0, 2, 10, 10));
-		
-		panel_2 = new JPanel();
-		add(panel_2);
-		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		lblLeftTitle = new JLabel("학생성적 입력");
-		lblLeftTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblLeftTitle);
-		
-		panel_5 = new JPanel();
-		add(panel_5);
 		
 		JLabel lblStdNo = new JLabel("학번");
 		lblStdNo.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -81,12 +64,6 @@ public class StdInsertPanel extends AbstractContentPanel<Student> {
 		
 		cmbBan = new JComboBox<>();
 		add(cmbBan);
-		
-		panel = new JPanel();
-		add(panel);
-		
-		panel_1 = new JPanel();
-		add(panel_1);
 	}
 	
 	public Student getStudent() {
@@ -107,6 +84,8 @@ public class StdInsertPanel extends AbstractContentPanel<Student> {
 		tfStdNo.setText(item.getStdNo() + "");
 		tfStdName.setText(item.getStdName());
 		cmbBan.setSelectedItem(item.getBan());
+		
+		tfStdNo.setEditable(false);
 	}
 	@Override
 	public Student getItem() {
@@ -128,8 +107,33 @@ public class StdInsertPanel extends AbstractContentPanel<Student> {
 		tfStdNo.setText("");
 		tfStdName.setText("");
 		cmbBan.setSelectedIndex(-1);
+		
+		if (!tfStdNo.isEditable()) {
+			tfStdNo.setEditable(true);
+		}
 	}
 
-	
-	
+	public JTextField getTfStdNo() {
+		return tfStdNo;
+	}
+
+	public void setTfStdNo(JTextField tfStdNo) {
+		this.tfStdNo = tfStdNo;
+	}
+
+	public JTextField getTfStdName() {
+		return tfStdName;
+	}
+
+	public void setTfStdName(JTextField tfStdName) {
+		this.tfStdName = tfStdName;
+	}
+
+	public JComboBox<Ban> getCmbBan() {
+		return cmbBan;
+	}
+
+	public void setCmbBan(JComboBox<Ban> cmbBan) {
+		this.cmbBan = cmbBan;
+	}
 }

@@ -31,7 +31,7 @@ public class StudentDetailDaoTest {
 	@Test
 	public void test02SelectStudentDetailByNo() {
 		System.out.printf("%s()%n", "test02SelectStudentDetailByNo");
-		Student student = new Student(20001);
+		Student student = new Student(20010);
 		StudentDetail searchStdDetail = dao.selectStudentDetailByNo(student);
 		Assert.assertNotNull(searchStdDetail);
 		System.out.println(searchStdDetail);
@@ -41,11 +41,11 @@ public class StudentDetailDaoTest {
 	public void test01InsertStudentDetail() {
 		System.out.printf("%s()%n", "test01InsertStudentDetail");
 		
-		StudentDetail stdDetail = new StudentDetail(20001, true, new Date(), getImage("태연.jpg"));
+		StudentDetail stdDetail = new StudentDetail(20010, true, new Date(), getImage("태연.jpg"));
 		
 		int res = dao.insertStudentDetail(stdDetail);
 		Assert.assertEquals(1, res);
-		System.out.println(dao.selectStudentDetailByNo(new Student(20001)));
+		System.out.println(dao.selectStudentDetailByNo(new Student(20010)));
 	}
 
 	private byte[] getImage(String imgName) {
@@ -69,18 +69,18 @@ public class StudentDetailDaoTest {
 		Calendar cal = GregorianCalendar.getInstance();
 		cal.getTime();
 
-		StudentDetail stdDetail = new StudentDetail(20001, false, new Date(), getImage("아이유.jpg"));
+		StudentDetail stdDetail = new StudentDetail(20010, false, new Date(), getImage("아이유.jpg"));
 		int res = dao.updateStudentDetail(stdDetail);
 
 		Assert.assertEquals(1, res);
 
-		System.out.println(dao.selectStudentDetailByNo(new Student(20001)));
+		System.out.println(dao.selectStudentDetailByNo(new Student(20010)));
 	}
 
 	@Test
 	public void testDeleteStudentDetail() {
 		System.out.printf("%s()%n", "testDeleteStudentDetail");
-		Student deleteStd = new Student(20001);
+		Student deleteStd = new Student(20010);
 		int res = dao.deleteStudentDetail(deleteStd);
 		Assert.assertEquals(1, res);
 	}
