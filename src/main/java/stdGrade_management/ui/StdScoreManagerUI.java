@@ -93,6 +93,7 @@ public class StdScoreManagerUI extends JFrame implements ActionListener {
 		
 		pStd = new StdManagerPanel();
 		pStd.setService(viewService);
+		pStd.getTfStdNo().setEditable(false);
 		pStd.getTfStdName().setEditable(false);
 		pStd.getCmbBan().setEnabled(false);
 		pWest.add(pStd);

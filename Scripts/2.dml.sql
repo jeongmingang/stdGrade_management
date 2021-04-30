@@ -1,6 +1,6 @@
 select user(), database ();
 
-use grade;
+use grade_jmg;
 
 show tables;
 

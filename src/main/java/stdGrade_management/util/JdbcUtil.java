@@ -16,18 +16,6 @@ public class JdbcUtil {
 	 		Properties prop = new Properties();
 	 		prop.load(in);   // 불러오는것 
 	 		con = DriverManager.getConnection(prop.getProperty("url"), prop);
-			/*
-			 System.out.println("prop > " + prop);
-			  
-			 for(Entry<Object, Object> e : prop.entrySet()) {
-			 	System.out.printf("%s -> %s%n", e.getKey(), e.getValue()); 
-			 }
-			 System.out.println();
-			 for(Object key : prop.keySet()) { 
-			 	System.out.print(key + " -> ");
-			 	System.out.println(prop.get(key)); 
-			 }
-			 */
 	 		
 	 	} catch (IOException e) {
 	 		e.printStackTrace();

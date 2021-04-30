@@ -1,11 +1,11 @@
 -- 성적관리
-DROP SCHEMA IF EXISTS grade;
+DROP SCHEMA IF EXISTS grade_jmg;
 
 -- 성적관리
-CREATE SCHEMA grade;
+CREATE SCHEMA grade_jmg;
 
 -- 학생
-CREATE TABLE grade.student (
+CREATE TABLE grade_jmg.student (
 	stdNo   INT         NOT NULL COMMENT '학번', -- 학번
 	stdName VARCHAR(20) NULL     COMMENT '학생명', -- 학생명
 	ban     VARCHAR(10) NULL     COMMENT '분반' -- 분반
@@ -13,41 +13,41 @@ CREATE TABLE grade.student (
 COMMENT '학생';
 
 -- 학생
-ALTER TABLE grade.student
+ALTER TABLE grade_jmg.student
 	ADD CONSTRAINT PK_student -- 학생 기본키
 		PRIMARY KEY (
 			stdNo -- 학번
 		);
 
 -- 분반
-CREATE TABLE grade.ban (
+CREATE TABLE grade_jmg.ban (
 	ban VARCHAR(10) NOT NULL COMMENT '분반' -- 분반
 )
 COMMENT '분반';
 
 -- 분반
-ALTER TABLE grade.ban
+ALTER TABLE grade_jmg.ban
 	ADD CONSTRAINT PK_ban -- 분반 기본키
 		PRIMARY KEY (
 			ban -- 분반
 		);
 
 -- 과목
-CREATE TABLE grade.subject (
+CREATE TABLE grade_jmg.subject (
 	subjNo   INT         NOT NULL COMMENT '과목번호', -- 과목번호
 	subjName VARCHAR(20) NULL     COMMENT '과목이름' -- 과목이름
 )
 COMMENT '과목';
 
 -- 과목
-ALTER TABLE grade.subject
+ALTER TABLE grade_jmg.subject
 	ADD CONSTRAINT PK_subject -- 과목 기본키
 		PRIMARY KEY (
 			subjNo -- 과목번호
 		);
 
 -- 성적
-CREATE TABLE grade.score (
+CREATE TABLE grade_jmg.score (
 	stdNo    INT NOT NULL COMMENT '학번', -- 학번
 	subjNo   INT NOT NULL COMMENT '과목번호', -- 과목번호
 	stdScore INT NULL     COMMENT '점수' -- 점수
@@ -55,7 +55,7 @@ CREATE TABLE grade.score (
 COMMENT '성적';
 
 -- 성적
-ALTER TABLE grade.score
+ALTER TABLE grade_jmg.score
 	ADD CONSTRAINT PK_score -- 성적 기본키
 		PRIMARY KEY (
 			stdNo,  -- 학번
@@ -63,7 +63,7 @@ ALTER TABLE grade.score
 		);
 
 -- 학생 세부정보
-CREATE TABLE grade.std_detail (
+CREATE TABLE grade_jmg.std_detail (
 	stdNo    INT      NOT NULL COMMENT '학번', -- 학번
 	pic      LONGBLOB NULL     COMMENT '증명사진', -- 증명사진
 	gender   TINYINT  NULL     COMMENT '성별', -- 성별
@@ -72,59 +72,59 @@ CREATE TABLE grade.std_detail (
 COMMENT '학생 세부정보';
 
 -- 학생 세부정보
-ALTER TABLE grade.std_detail
+ALTER TABLE grade_jmg.std_detail
 	ADD CONSTRAINT PK_std_detail -- 학생 세부정보 기본키
 		PRIMARY KEY (
 			stdNo -- 학번
 		);
 
 -- 학생
-ALTER TABLE grade.student
+ALTER TABLE grade_jmg.student
 	ADD CONSTRAINT FK_ban_TO_student -- 분반 -> 학생
 		FOREIGN KEY (
 			ban -- 분반
 		)
-		REFERENCES grade.ban ( -- 분반
+		REFERENCES grade_jmg.ban ( -- 분반
 			ban -- 분반
 		);
 
 -- 성적
-ALTER TABLE grade.score
+ALTER TABLE grade_jmg.score
 	ADD CONSTRAINT FK_student_TO_score -- 학생 -> 성적
 		FOREIGN KEY (
 			stdNo -- 학번
 		)
-		REFERENCES grade.student ( -- 학생
+		REFERENCES grade_jmg.student ( -- 학생
 			stdNo -- 학번
 		)
 		ON DELETE CASCADE;
 
 -- 성적
-ALTER TABLE grade.score
+ALTER TABLE grade_jmg.score
 	ADD CONSTRAINT FK_subject_TO_score -- 과목 -> 성적
 		FOREIGN KEY (
 			subjNo -- 과목번호
 		)
-		REFERENCES grade.subject ( -- 과목
+		REFERENCES grade_jmg.subject ( -- 과목
 			subjNo -- 과목번호
 		)
 		ON DELETE CASCADE;
 
 -- 학생 세부정보
-ALTER TABLE grade.std_detail
+ALTER TABLE grade_jmg.std_detail
 	ADD CONSTRAINT FK_student_TO_std_detail -- 학생 -> 학생 세부정보
 		FOREIGN KEY (
 			stdNo -- 학번
 		)
-		REFERENCES grade.student ( -- 학생
+		REFERENCES grade_jmg.student ( -- 학생
 			stdNo -- 학번
 		)
 		ON DELETE CASCADE;
 	
 -- 권한 부여
 grant all 
-	on grade.*
-	to 'user_grade'@'localhost' identified by 'rootroot';
+	on grade_jmg.*
+	to 'user_grade_jmg'@'localhost' identified by 'rootroot';
 
 
 	
