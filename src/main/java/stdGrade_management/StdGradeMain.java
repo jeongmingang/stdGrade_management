@@ -20,7 +20,7 @@ import stdGrade_management.ui.TotalStdScoreUI;
 import stdGrade_management.ui.list.StdScoreTablePanel;
 
 @SuppressWarnings("serial")
-public class StudentgradeMain extends JFrame implements ActionListener {
+public class StdGradeMain extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JPanel pBtn;
@@ -36,7 +36,7 @@ public class StudentgradeMain extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StudentgradeMain frame = new StudentgradeMain();
+					StdGradeMain frame = new StdGradeMain();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class StudentgradeMain extends JFrame implements ActionListener {
 		});
 	}
 
-	public StudentgradeMain() {
+	public StdGradeMain() {
 		service = new StudentScoreViewService();
 		initialize();
 	}
